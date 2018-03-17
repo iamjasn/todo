@@ -9,6 +9,8 @@ import { EMAIL, API_URLS } from './todoConstants';
 
 import './TodoApp.css';
 
+const CONTENT_TYPE = { 'Content-Type': 'application/x-www-form-urlencoded' };
+
 class TodoApp extends Component {
   constructor() {
     super();
@@ -31,14 +33,12 @@ class TodoApp extends Component {
       .catch(error => this.showError());
   }
   addTodo = (input) => {
-    post(
-      API_URLS.addTodo,
-      qs.stringify({ email: EMAIL, text: input.value }),
-      { 'Content-Type': 'application/x-www-form-urlencoded' }
-    )
+    const data = qs.stringify({ email: EMAIL, text: input.value });
+
+    post(API_URLS.addTodo, data, CONTENT_TYPE)
       .then((response) => {
         this.setState({
-          todos: [...this.state.todos, response.data]
+          todos: [ response.data, ...this.state.todos ]
         });
       })
       .catch(error => this.showError());
@@ -48,13 +48,9 @@ class TodoApp extends Component {
   }
 
   markAs = (id, value) => {
-    const data = qs.stringify({
-      email: EMAIL,
-      id,
-      completed: value,
-    });
+    const data = qs.stringify({ id, email: EMAIL, completed: value });
 
-    post(API_URLS.markTodo, data)
+    post(API_URLS.markTodo, data, CONTENT_TYPE)
       .then((response) => {
         const updatedTodo = { ...response.data, id: parseInt(response.data.id, 10) };
         const updatedTodos = this.state.todos.map(item =>
@@ -62,23 +58,23 @@ class TodoApp extends Component {
         );
         this.setState({ todos: updatedTodos });
       })
+      .catch(error => this.showError());
   }
 
   showError() {
-    console.log('an error');
     this.setState({ hasError: true });
-    // hide the error after 2 seconds
-    setTimeout(() => {this.setState({ hasError: false })}, 2000);
+    // hide the error after 3 seconds
+    setTimeout(() => {this.setState({ hasError: false })}, 3000);
   }
 
   render() {
     const { todos, isLoading, hasError } = this.state;
 
     return (
-      <main className="container--main">
-        <TodoInput addTodo={this.addTodo} />
+      <main className="todo-container">
+        {hasError && <p className="todo-error-message">An error occurred.</p>}
 
-        {hasError && <p>An error occurred.</p>}
+        <TodoInput addTodo={this.addTodo} />
 
         {!!todos.length &&
           <ul className="todo-list">
@@ -94,9 +90,9 @@ class TodoApp extends Component {
           </ul>
         }
 
-        {isLoading && <p className="loading-message">Loading to do list&hellip;</p>}
+        {isLoading && <p className="todo-loading-message">Loading to do list&hellip;</p>}
 
-        {!isLoading && !todos.length && <p>No todo items</p>}
+        {!isLoading && !todos.length && <p className="todo-empty-message">No todo items</p>}
       </main>
     );
   }

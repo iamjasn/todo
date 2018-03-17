@@ -1,4 +1,4 @@
-.container--main {
+.todo-container {
   width: 70%;
   margin: 15vh auto 5vh;
 }
@@ -7,9 +7,19 @@
   display: block;
 }
 
-.loading-message {
+.todo-loading-message,
+.todo-empty-message {
   margin-top: 20vh;
   color: #b8b8b8;
   text-align: center;
   font-style: italic;
+}
+
+.todo-error-message {
+  position: absolute;
+  margin-top: -5vh;
+  text-align: center;
+  left: 0;
+  right: 0;
+  color: #f11e1e;
 }
