@@ -1,0 +1,38 @@
+.todo-form {
+  height: 40px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.todo-form-input {
+  height: 100%;
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #e0dddd;
+  border-radius: 4px;
+  outline: none;
+  background: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.todo-form-input:focus {
+  border-color: #89cde0;
+}
+
+.todo-form-input::placeholder {
+  color: #b8b8b8
+}
+
+.todo-form-button {
+  width: 80px;
+  padding: 3px;
+  margin-left: -95px;
+  border-radius: 3px;
+  font-size: 14px;
+  border: 0;
+  outline: none;
+  background: #4daedc;
+  color: white;
+  text-transform: capitalize;
+  cursor: pointer;
+}

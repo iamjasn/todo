@@ -1,0 +1,15 @@
+.container--main {
+  width: 70%;
+  margin: 15vh auto 5vh;
+}
+
+.todo-list {
+  display: block;
+}
+
+.loading-message {
+  margin-top: 20vh;
+  color: #b8b8b8;
+  text-align: center;
+  font-style: italic;
+}
