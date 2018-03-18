@@ -1,5 +1,3 @@
-The file `todoConstants.js` contains the enpoints for the network requests and is required for the application to work correctly. It should be added to the `src/` directory.
-
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 From the project directory, run:
