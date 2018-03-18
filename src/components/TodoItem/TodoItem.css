@@ -8,9 +8,8 @@
   color: #2d2a2a;
   font-weight: bold;
   background: white;
-  overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
+  word-wrap: normal;
 }
 
 .todo-item-container input[type="checkbox"] {
@@ -33,17 +32,24 @@
   content: '';
 }
 
-.todo-item-container input[type="checkbox"]::after:checked {
+.todo-item-container input[type="checkbox"]:checked::after{
   content: '\2713';
 }
 
 .todo-item-container label {
   display: inline-block;
+  max-width: calc(100% - 30px);
+  height: 100%;
+  line-height: 25px;
   vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
-.todo-item-container.completed {
+.todo-item-container.completed,
+.todo-item-container.completed::selection {
   color: #878282;
+  -webkit-text-fill-color: #878282;
 }
 
 .todo-item-container.completed input[type="checkbox"]::after {
